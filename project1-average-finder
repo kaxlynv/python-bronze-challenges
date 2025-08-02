@@ -1,0 +1,28 @@
+run_program = True
+
+num_list = []
+
+#turning a string of numbers into a list of integers
+while run_program == True:
+  num = input("Enter a series of numbers: ")
+  temp_list = num.split()
+  for i in range(len(temp_list)):
+    num_list.append(int(temp_list[i]))
+  
+#program options of add more, mean or quit
+y_n = input("Would you like to enter more numbers (enter 'n'), calculate the mean (enter 'm'), or quit the program (enter 'q')? ")
+  
+if y_n == "n":
+  run_program = True
+    
+elif y_n == "m":
+  total = 0
+  for i in range(len(num_list)):
+  total = total + num_list[i]
+  average = total / len(num_list)
+  print("the mean is", average)
+  run_program = False
+      
+elif y_n == "q":
+  print("Goodbye")
+  run_program = False
