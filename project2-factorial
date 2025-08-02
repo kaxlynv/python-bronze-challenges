@@ -1,0 +1,9 @@
+def factorial(n):
+    factorial = 1 
+    for i in range (n):
+        factorial = factorial * (i+1)
+    return factorial
+    
+n = int(input("Enter the number you want the factorial of: "))
+answer = factorial(n)
+print(f"the factorial of {n} is {answer}")
