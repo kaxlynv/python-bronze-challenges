@@ -1,0 +1,36 @@
+#add numbers to list & find max and min
+def max_and_mins():
+  temp_list = numbers.split()
+
+  # turning the numbers (currently strings) into integers
+  for i in range(len(temp_list)):
+    num_list.append(int(temp_list[i]))
+    
+  maximum = max(num_list)
+  minimum = min(num_list)
+  print("the maximum is ", maximum, " and the minimum is ", minimum)
+  
+
+
+#adding new numbers
+def code_running():
+  continue_code = True
+  while continue_code == True:
+    yes_or_no = input("Do you want to add another number? (enter 'y' or 'n'): ")
+    if yes_or_no == "y":
+      new_number = int(input("Enter a new number: "))
+      num_list.append(new_number)
+      maximum = max(num_list)
+      minimum = min(num_list)
+      print("the maximum is now ", maximum, " and the minimum is now ", minimum)
+  
+    elif yes_or_no == "n":
+      print("Goodbye!")
+      continue_code = False
+      
+#global lines of code      
+num_list = []
+numbers = input("Enter a number, or list of numbers, each separated by a space: ")
+
+max_and_mins()
+code_running()
