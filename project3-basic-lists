@@ -1,0 +1,10 @@
+added_names = input("Enter the list of names you wish to add to the list (separate each name by a space) : ")
+names = added_names.split()
+
+list_order = input("Would you like to print the names in its original or reverse order? (enter 'original' or 'reverse'): ")
+
+if list_order == "original":
+  print(names)
+elif list_order == "reverse":
+  reverse = names[::-1]
+  print(reverse)
