@@ -1,0 +1,85 @@
+#take in day, month, year
+
+#conditions for an actual day: check year, then month, then day (subroutine for each)
+#0<year<2100
+#month = jan, feb, mar...dec
+
+#jan, mar, may, jul, aug, oct, dec: day = 1 - 31 
+#apr, jun, sep, nov: day = 1 - 30 
+#feb: day = 1 - 28 UNLESS year // 4 = 0 (leap year)
+
+
+def valid_yr(year, valid):
+  if year > 0 and year < 2100:
+    valid += 1
+  return valid
+    
+    
+def valid_month(month, month_list, valid):
+  correct_mth = False
+  for i in range(12):
+    if month == month_list[i]:
+      correct_mth = True
+  if correct_mth == True:
+    valid += 1
+  return valid
+
+
+def month_type(month, d30_months, d31_months):
+  #check if its a 30 day month
+  for i in range(4):
+    if month == d30_months[i]:
+      month_num = 30
+  #check if its a 31 day month
+  for i in range(7):  
+    if month == d31_months[i]:
+      month_num = 31
+  #self explanatory lol      
+  if month == "february":
+    month_num = 28
+  return month_num
+
+
+def leap_check(day, month, year, month_num):
+  if month == "february" and year % 4 == 0:
+    month_num = 29
+  return month_num
+      
+      
+def valid_day(day, month_num, valid):
+  if day > 0 and day <= month_num:
+    valid += 1
+  return valid
+
+
+#main    
+valid = 0
+month_num = 0
+
+month_list = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+d30_months = ["april", "june", "september", "november"]
+d31_months = ["january", "march", "may", "july", "august", "october", "december"]
+
+
+date_input = input("Enter the date you wish to validate, must be before the year 2100 (enter: day month year): ")
+
+#make date into list & variables + convert day & year into integers
+
+date = date_input.split()
+day = int(date[0])
+month = date[1]
+year = int(date[2])
+
+valid = valid_yr(year, valid)
+
+valid = valid_month(month, month_list, valid)
+
+month_num = month_type(month, d30_months, d31_months)
+month_num = leap_check(day, month, year, month_num)
+valid = valid_day(day, month_num, valid)
+
+
+if valid == 3:
+  print(date_input," is an actual calendar date!")
+else:
+  print(date_input," is not an actual calendar date!")
