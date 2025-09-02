@@ -1,0 +1,71 @@
+import random
+
+#for name: make a 2D list of name parts + concatenate them in class trump_card by random list index
+name_list = [["Great ", "Mighty ", "Wonderful ", "Charming ", "Brave ", "Wild ", "Stealthy ", "Enigmatic "], ["Mage", "Emperor", "Warrior", "Defender", "Offender", "Champion", "Rogue", "Rascal"]]
+
+class Card:
+  def __init__(self):
+    self.name = random.choice(name_list[0]) + random.choice(name_list[1])
+    self.gender = input("Would you like to be male (type 'm') or female (type 'f'): ")
+    self.category = int(input("Would you like to be a hero (enter 1), villain (enter 2), or vigilante? (enter 3)? "))
+    self.strength = None
+    self.intelligence = random.randint(1,100)
+    self.agility = random.randint(1,100)
+    self.magic = None
+    
+
+#ask for category & gender (make input)
+print("Welcome to the top trumps generator!")
+print(" ")
+user_card = Card()
+
+#strength rating (highest to lowest) - hero, villain, vigilante
+#if hero: 67-100, villain: 34-66, vigilante: 33-0
+if user_card.category == 1:
+  user_card.category = "Hero"
+  user_card.strength = random.randrange(67, 101)
+elif user_card.category == 2:
+  user_card.category = "Villain"
+  user_card.strength = random.randrange(34, 67)
+elif user_card.category == 3:
+  user_card.category = "Vigilante"
+  user_card.strength = random.randrange(1, 34)
+
+#ask user for enhanced strength, agility or intelligence (+10 to it)
+#assign magic to appropriate enhanced skills
+print("You get to have a power boost!! ")
+power_boost = int(input("Would you like enhanced strength (enter 1), agility (enter 2), or intelligence (enter 3)"))
+
+if power_boost == 1:
+  user_card.strength += 10
+  user_card.magic = random.choice(["Creation", "Shapeshifting", "Energy Drain"])
+elif power_boost == 2:
+  user_card.agility += 10
+  user_card.magic = random.choice(["Flight", "Speed", "Teleportation"])
+elif power_boost == 3:
+  user_card.intelligence += 10
+  user_card.magic = random.choice(["Weather Control", "Mind Control", "Necromancy"])
+
+#ensuring scores remain between 1 and 100 inclusive
+if user_card.agility > 100 or user_card.agility < 1:
+  user_card.agility = 50
+elif user_card.intelligence > 100 or user_card.intelligence < 1:
+  user_card.magic = 50
+
+name_ = user_card.name 
+gender_ = user_card.gender
+category_ = user_card.category
+strength_ = user_card.strength
+intelligence_ = user_card.intelligence
+agility_ = user_card.agility
+magic_ = user_card.magic
+
+#print out trump_card for user
+print(" ")
+print(f"Name: {name_}")
+print(f"Gender: {gender_}")
+print(f"Category: {category_}")
+print(f"Strength: {strength_}")
+print(f"Intelligence: {intelligence_}")
+print(f"Agility: {agility_}")
+print(f"Magic: {magic_}")
