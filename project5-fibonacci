@@ -1,0 +1,36 @@
+#i made this fibonacci sequence with the assumption that it starts from 1, not 0
+
+#calculating fibonacci sequence values
+def fibonacci_maker():
+  
+  #creating placeholder values in the list to soon be replaced
+  for i in range(num):
+    values.append(0)
+    
+  for i in range(num):
+    #creating the 1st value which is always 1 (in this case)
+    if i < 1:
+      j = i + 1
+      next_num = values[j] + values[j-1] + 1
+      values[i] = next_num
+      
+    #creating 2nd value which is also always 1  
+    elif i == 1:
+      next_num = values[i] + values[i-1]
+      values[i] = next_num
+      
+    #creating all proceeding values by adding previous 2 numbers  
+    else:
+      next_num = values[i-1] + values[i-2]
+      values[i] = next_num
+  
+  
+values = []
+
+num = int(input("How many values of the fibonacci sequence do you want to see? "))
+fibonacci_maker()
+
+print(values[::-1])
+print("There are ", num, "numbers in this sequence")
+
+#ps - i prefer using f strings for the above line but trinket won't let me :/
