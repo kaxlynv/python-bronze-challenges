@@ -1,0 +1,148 @@
+import random
+
+player_fund = 1.0
+
+cherry = "🍒"
+bell = "🔔"
+lemon = "🍋"
+orange = "🍊"
+star = "⭐"
+skull = "💀"
+
+symbols = [cherry, bell, lemon, orange, star, skull]
+
+symbol_1 = random.choice(symbols)
+symbol_2 = random.choice(symbols)
+symbol_3 = random.choice(symbols)
+
+#symbol_list = [symbol_1, symbol_2, symbol_3]
+
+
+# ** generating random slot machine results**
+def random_symbols():
+  symbol_1 = random.choice(symbols)
+  symbol_2 = random.choice(symbols)
+  symbol_3 = random.choice(symbols)
+  symbol_list = [symbol_1, symbol_2, symbol_3]
+  return symbol_list
+
+player_fund = 1.0
+
+#for later use in machine_outcome for checking for 3 skulls or bells
+
+# **subroutine to determine outcome of slot result**
+def machine_outcome(symbol_list):
+  global player_fund
+
+  #IF AT LEAST 2 ARE THE SAME! 
+  if symbol_list[0] == symbol_list[1] or symbol_list[0] == symbol_list[2] or symbol_list[1] == symbol_list[2]:
+      
+      #B: if ANY are bells, checking if 3
+    if symbol_list[0] == bell or symbol_list[1] == bell or symbol_list[2] == bell:
+      count = 0
+      for i in range (3):
+        if symbol_list[i] == bell:
+          count = count + 1
+        #B: if ALL are bells - jackpot! +£5
+      if count == 3:
+        player_fund = player_fund + 5.0
+        money_left(player_fund)
+        print("ULTRA JACKPOT!!!💥 You just won £5!!! You now currently have £",player_fund)
+      else:
+        money_left(player_fund)
+        print("Oh sorry, you didn't win anything this time")
+
+      #S: if ANY are skulls, checking if 2 or 3  
+    elif symbol_list[0] == skull or symbol_list[1] == skull or symbol_list[2] == skull:
+      count = 0
+      for i in range (3):
+        if symbol_list[i] == skull:
+            count = count + 1
+        #S: if ALL are skulls - KO! money = £0
+      if count == 3:
+        player_fund = 0
+        money_left(player_fund)
+        print("OH NOOO, you just lost ALL of your money 💔. Bye bye, better luck next time!")
+        keep_play = False
+    
+        #S: if 2 are skulls- -£1  
+      elif count == 2:
+        player_fund = player_fund - 1.0
+        money_left(player_fund)
+        print("Oh no, you just lost £1! You now have £",player_fund)
+    
+    #if 2 are same NOT SKULL - nothing 
+    else:
+      money_left(player_fund)
+      print("Oh sorry, you didn't win anything this time.")
+
+      
+    #if ALL are same - NOT SKULL OR BELL   
+    if symbol_list[0] == symbol_list[1] and symbol_list[1] == symbol_list[2]:
+      if symbol_list[0] != skull and symbol_list != bell:
+        player_fund = player_fund + 1.0
+        print("Jackpot!! You just won £1!! You now currently have £",player_fund)
+        money_left(player_fund)
+  
+
+  #if all are different - nothing
+  else:
+    print("Oh sorry, you didn't win anything this time")
+    money_left(player_fund)
+        
+
+#checks if player has ran out of money- called after each go
+def money_left(player_fund):
+  if player_fund < 0.2:
+    print("You have run out of money and have £0 or less! Goodbye! 👋")
+
+    keep_play = False
+    quit()
+
+#main
+
+keep_play = True
+
+print("🎰💫  Welcome to the fruit slot machine!  💫🎰")
+print(" ")
+print("Each go costs only 20p!!")
+print(" ")
+
+while keep_play == True:
+  
+  count = 0
+  print("Right now you currently have £", player_fund)
+  game_start = input("Type 'play' to start the machine! ")
+  print(" ")
+  
+  if game_start == "play":
+    symbol_list = random_symbols()
+    print(symbol_list)
+    player_fund = player_fund - 0.2
+    machine_outcome(symbol_list)
+    print(" ")
+    
+    if keep_play == False:
+      print("You have run out of money! Goodbye! 👋")
+      quit()
+    
+    if keep_play == True:
+      ask_play = input("Do you still want to play? type 'y' or 'n': ")
+      print("------------------------------------")
+      print(" ")
+    
+      if ask_play == "n":
+        print("Goodbye! 👋")
+        keep_play = False
+      
+      elif ask_play == "y":
+        keep_play = True
+
+#rules:
+#deduct -20p per go
+#if 2 = same, +50p for player /
+#if all = same (exc skull & bell), +£1 /
+#if all = bells, +£5 /
+#if 2 = skull, -£1 /
+#if 3 = skull, fund = £0, game over /
+#give option to quit after each go with fund or end when broke /
