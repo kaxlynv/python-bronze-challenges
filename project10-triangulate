@@ -1,0 +1,62 @@
+#triangle inequality theorem: sum of any 2 sides must be greater than 3rd
+def real_triangle(int_sides):
+  valid = False
+  if (int_sides[0] + int_sides[1]) > int_sides[2]:
+    print("This is a valid triangle !")
+    print(" ")
+    valid = True
+  return valid
+    
+
+def triangle_type(int_sides):
+  valid = True
+  #if all different - scalene
+  #right angle - find the longest side & prove with pythagoras
+  if int_sides[0] != int_sides[1] and int_sides[1] != int_sides[2] and int_sides[0] != int_sides[2]:
+    longest_side(int_sides, other_sides)
+    if (other_sides[0]*other_sides[0]) + (other_sides[1]*other_sides[1]) == max(int_sides)*max(int_sides):
+      shape_type = "Right-angled"
+    else:
+     shape_type = "Scalene"
+  elif int_sides[0] == int_sides[1] or int_sides[1] == int_sides[2] or int_sides[0] == int_sides[2]:
+    #if all equal - equilateral
+    if int_sides[0] == int_sides[1] and int_sides[1] == int_sides[2]:
+      shape_type = "Equilateral"
+    #if only 2 equal - isoscles
+    else:
+      shape_type == "Isoscles"
+      
+  return shape_type
+  
+#find the longest side & store other 2 in another list - called in previous subroutine
+
+def longest_side(int_sides, other_sides):
+  for i in range(3):
+    if int_sides[i] != max(int_sides):
+      other_sides.append(int_sides[i])
+  return other_sides
+      
+      
+#main    
+valid = False
+
+int_sides = []
+other_sides = []
+shape_type = None
+
+#user inputs 3 sides and stores it as list of integers
+while valid == False:
+  sides = input("Enter the length of 3 sides of the triangle (seperate each length with a space): ").split()
+  print("")
+  for i in range(3):
+    int_sides.append(int(sides[i]))
+  real_triangle(int_sides)   
+  shape_type = triangle_type(int_sides)
+      
+  print("")
+  if shape_type != None:
+    print("The triangle type is: ",shape_type)
+    valid = True
+  else:
+    print("The type is: ",shape_type)
+    print("This is not a valid triangle. Please try again")
